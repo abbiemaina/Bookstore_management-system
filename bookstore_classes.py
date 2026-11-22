@@ -80,7 +80,7 @@ class Customer:
             print(f"Purchase history for {self.name}:")
             for purchase in self.purchase_history:
                 print(purchase)
-            else:
+        else:
                 print(f"No purchase history for {self.name}.")
 
 
