@@ -1,0 +1,4 @@
+# Python cache files
+__pycache__        #ignores python cache files.
+*.py[cod]          #ignores compiled python files.
+.DS_Store.         #ignores unnecessary macOS files.
