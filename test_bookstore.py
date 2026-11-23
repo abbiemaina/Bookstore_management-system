@@ -7,6 +7,7 @@ import bookstore_classes as bc
 
 # Create a book object
 book1 = bc.Book("Mile High", "Liz Tomforde", "978-0141", 15, 10)
+book2 = bc.Book("The only one left", "Riley Sager", "874-0415", 20, 15)
 
 # Test display_book_details()
 book1.display_book_details()
@@ -44,3 +45,60 @@ print(customer1.calculate_total_spent())     #returns the total of the purchases
 # Test search_purchase()
 print(customer1.search_purchase(35)) 
 print(customer1.search_purchase(80))    #since this is not in the customer's purchase history the expected output is purchase is not found.
+
+
+
+##### TEST THE CLASS ORDER #####
+
+# Create an order object
+order1 = bc.Order("ORD001", customer1, book1, 2, "2026-11-20", "Pending")
+
+# Test display_order_details()
+order1.display_order_details()
+
+# Test calculate_total()
+
+# Test update_status()
+result = order1.update_status("Shipped")
+print(result)
+print("Current order status:", order1.status) 
+
+# Test add_book()
+result = order1.add_book(book2, 1)
+print(result)
+print("Number of books in order:", len(order1.book))
+
+
+# Test remove_book()
+result = order1.remove_book(book2)
+print(result)
+print("Number of books remaining:", len(order1.book))
+
+# Test search_book()
+result = order1.search_book(book2)
+print(result)     #book will not be found because it was removed from the order.
+
+
+
+##### TEST THE INVENTORY CLASS #####
+
+# Create a sample inventory
+inventory1 = bc.Inventory("INV001", 100, "2026-11-23", 10)
+
+# Test display_inventory()
+inventory1.display_inventory()
+
+# Test check_low_stock()
+inventory1.check_low_stock()
+
+# Test add_books()
+inventory1.add_books(50)
+print("Updated inventory total:", inventory1.total_books)
+
+# Test update_inventory()
+inventory1.update_inventory()
+print("Updated inventory total:", inventory1.total_books)
+
+# Test get_total_books()
+total = inventory1.get_total_books()
+print("Total books in inventory:", total)

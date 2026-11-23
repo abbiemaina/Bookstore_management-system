@@ -118,14 +118,14 @@ class Order:
     def __init__(self, order_id, customer, book, quantity, order_date, status):
         self.order_id = order_id
         self.customer = customer
-        self.book = book
+        self.book = [{'book': book, 'quantity': quantity}]     #stores books as a list of dictionaries.
         self.quantity = quantity
         self.order_date = order_date
         self.status = status
 
 
     def __str__(self):
-        return f"Order ID: {self.order_id}, Customer: {self.customer.name}, Book: {self.book.title}, Quantity: {self.quantity}, Order Date: {self.order_date}, Status: {self.status}"
+        return f"Order ID: {self.order_id}, Customer: {self.customer.name}, Status: {self.status}"
 
 
     # 1. A method to display order details
@@ -133,13 +133,15 @@ class Order:
         details = {
             "Order ID": self.order_id,
             "Customer": self.customer.name,  #refers back to the customer object and gets the name of the customer
-            "Book": self.book.title,        #refers back to the book object and gets the title of the book
-            "Quantity": self.quantity,
             "Order Date": self.order_date,
             "Status": self.status
         }
         for key, value in details.items():
             print(f"{key}: {value}")
+
+        print("Books:")
+        for item in self.book:
+            print(f"Book: {item['book'].title}, Quantity: {item['quantity']}")
 
 
     # 2. A method to calculate the total cost of all books in the order
@@ -203,7 +205,7 @@ class Inventory:
     def display_inventory(self):
         details = {
             "Inventory ID": self.inventory_id,
-            "Total books": self.total_boooks,
+            "Total books": self.total_books,
             "Last upadated": self.last_updated,
             "Low stock threshold": self.low_stock_threshold
         }
@@ -241,7 +243,7 @@ class Inventory:
     # 5. A method that returns the total amount of books in the inventory currently
     def get_total_books(self):
         count = 0
-        for book in self.books:
+        for book in self.total_books:
             count += 1
 
         return count
