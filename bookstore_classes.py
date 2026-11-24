@@ -230,21 +230,21 @@ class Inventory:
     # 4. A method to update the total number of books in the inventory
     def update_inventory(self):
         while True:
-            quantity = int(input('Enter the new total number of books: '))
-            if quantity >= 0:
-                self.total_books = quantity
-                print("Inventory updated successfully")
-                break
-            else:
-                print("Invalid quantity. Please try again.")
+            try:
+                quantity = int(input('Enter the new total number of books: '))
+                if quantity >= 0:
+                    self.total_books = quantity
+                    print("Inventory updated successfully")
+                    break
+                else:
+                    print("Invalid quantity. Please try again")
+            except ValueError:
+                print("Invalid input. Please enter a whole number.")
+
 
 
 
     # 5. A method that returns the total amount of books in the inventory currently
     def get_total_books(self):
-        count = 0
-        for book in self.total_books:
-            count += 1
-
-        return count
+        return self.total_books
     

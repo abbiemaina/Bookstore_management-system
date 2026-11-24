@@ -57,6 +57,10 @@ order1 = bc.Order("ORD001", customer1, book1, 2, "2026-11-20", "Pending")
 order1.display_order_details()
 
 # Test calculate_total()
+expected_total = book1.price * 2
+actual_total = order1.calculate_total()
+print("Expected total:", expected_total)
+
 
 # Test update_status()
 result = order1.update_status("Shipped")
@@ -102,3 +106,34 @@ print("Updated inventory total:", inventory1.total_books)
 # Test get_total_books()
 total = inventory1.get_total_books()
 print("Total books in inventory:", total)
+
+
+
+##### ADDITIONAL TESTING (EDGE CASES) #####
+# Test A is an inventory with zero books
+inventory1.total_books = 0
+print("Total books:", inventory1.get_total_books())
+inventory1.check_low_stock() 
+#this test checks whether an inventory can store 0 books, whether the get_total_books returns zero and whether the check_low_stock will recognize that the stock is low, assuming the threshold is >= 0.
+
+
+
+# Test B is adding books to an empty inventory.
+inventory1.add_books(50)
+print("Expected total: 50")
+print("Actual total:", inventory1.get_total_books())
+
+
+# Test C is testing multiple books in an order
+expected_total = (book1.price * 2) + (book2.price * 3)
+actual_total = order1.calculate_total()
+print("Expected total:", expected_total)
+print("Actual total:", actual_total)
+
+
+## INTERGRATION TEST ##
+print(customer1)
+print(book1)
+print(book2)
+print(order1)
+print("Order total:", order1.calculate_total())
